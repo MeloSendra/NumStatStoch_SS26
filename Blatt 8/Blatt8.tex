@@ -1,0 +1,32 @@
+\documentclass[12pt]{scrartcl}
+
+\input{../styles/Packages.tex}
+\input{../styles/FormatAndHeader}
+\input{../styles/Lists}
+
+\setcounter{sheetnr}{7}
+\setcounter{exnum}{7}
+\setcounter{teilaufgabe}{1}
+
+\begin{document}
+    \teil{Quadraturgewichte bestimmen}
+    \begin{enumAlph}
+        \item Gegeben sind:
+        \[
+            c_j:= \frac{1}{b-a} \int_{a}^{b} \ell_{j,m}(x)dx, \int_{a}^{b}f(x)dx \approx (b-a) \sum_{j=0}^{m}c_j f(x_j)
+        \]
+
+        \begin{enumRoman}
+        \item $m=1, a=0, b=1, x_0=0, x_1=\frac{1}{2}$
+            \begin{flalign*}
+                &\ell_{0,1}(x) = \frac{x - x_1}{x_0 - x_1} = \frac{x - \frac{1}{2}}{0 - \frac{1}{2}} = -2x+1 &\\
+                &\ell_{1,1}(x) = \frac{x - x_0}{x_1 - x_0} = \frac{x - 0}{\frac{1}{2} - 0} = 2x &\\[6pt]
+                &c_0 = \int_{0}^{1} \ell(x)dx = \int_{0}^{1}(1-2x)dx = {\left[x-x^2\right]}_0^1 = 0 &\\
+                &c_1 = \int_{1}^{1} \ell(x)dx = \int_{0}^{1}2xdx = {\left[x^2\right]}_0^1 = 1 &\\
+                &\int_{0}^{1}f(x)dx \approx (1-0) \sum_{j=0}^{m}c_j f(x_j) = \sum_{j=0}^{1}c_j f(x_j) = 0\cdot f(0) + 1\cdot f\left (\frac{1}{2}\right ) &
+            \end{flalign*}
+
+        \item $m=2, a=-1, b=1, x_0=\frac{-\sqrt{2}}{2}, x_1=0, x_2=\frac{\sqrt{2}}{2}$
+        \end{enumRoman}
+    \end{enumAlph}
+\end{document}

@@ -1,0 +1,155 @@
+\documentclass[12pt]{scrartcl}
+
+\input{../styles/Packages.tex}
+\input{../styles/FormatAndHeader}
+\input{../styles/Lists}
+
+\setcounter{sheetnr}{4}
+\setcounter{exnum}{4}
+\setcounter{teilaufgabe}{1}
+
+
+\begin{document}
+
+% Aufgabe 4.1 
+\teil{Komplexe Wiederholung, DFT}
+
+\centering{$n:=4$ und $\omega_n := e^{2\pi/n}$}
+\begin{enumAlph}
+
+    \item $k=0,1,2,3$,  $m_k:=(\omega_n^0,\omega_n^k,\omega_n^{2k},\omega_n^{3k})^T \in \mathbb{C}
+    ^4$\\
+    
+    Mit $n=4$ sind die Werte von $\omega_4$ wie folgt:
+
+    \[\omega_n = \omega_4 = e^{2\pi i/4}=e^{i\pi /2}=i\]
+    \[\omega_4^{0}=1, \omega_4^{1}=i,\omega_4^{2}=-1,\omega_4^{3}=-i\]
+
+    Und die zugehörige Vektoren:\\
+    
+    \vspace{0.1cm}
+\begin{center}%
+    $\mathit{m_0} = \begin{pmatrix} 1 \\ 1 \\ 1 \\ 1 \end{pmatrix}$% 
+    $\mathit{m_1} = \begin{pmatrix} 1 \\ i \\ -1 \\ -i \end{pmatrix}$%
+    $\mathit{m_2} = \begin{pmatrix} 1 \\ -1 \\ 1 \\ -1 \end{pmatrix}$%
+    $\mathit{m_3} = \begin{pmatrix} 1 \\ -i \\ -1 \\ i \end{pmatrix}$%
+\end{center}
+
+   \item Matrizen $M$ und $\overline{M}=\overline{(\omega_4^{jk})}_{0\leq j,k\leq 3}=\omega_4^{-jk}$\\
+
+   \vspace{0.2cm}
+
+     \[   
+     M=\begin{pmatrix}
+     1 & 1 & 1 & 1      \\
+     1 & i & -1 & -i    \\
+     1 & -1 & 1 & -1    \\
+     1 & 1 & -1 & i     \\
+     \end{pmatrix}
+    ,
+    \overline{M}=\begin{pmatrix}
+     1 & 1 & 1 & 1      \\
+     1 & -i & -1 & i    \\
+     1 & -1 & 1 & -1    \\
+     1 & i & -1 & -i     \\
+     \end{pmatrix}
+    \]    
+    \item Matrizenprodukt $M\overline{M}$\\
+    
+    Das Matrizenprodukt ist als 
+    $(M\overline{M})_{j,l} = \sum_{k=0}^{3} \omega_4^{jk}\cdot \overline{\omega_4^{lk}}
+    = \sum_{k=0}^{3} \omega_4^{jk}\cdot \omega_4^{-lk}
+    = \sum_{k=0}^{3} \omega_4^{(j-l)k}$
+    definiert. Hier folgt eine Fallunterscheidung.
+
+    \begin{itemize}
+        \item[] Fall 1: $j = l$
+        In diesem Fall werden alle Terme $\omega_4^0 = 1$ und deswegen ist die Summe gleich 4.
+
+        \item[] Fall 2: $j \neq l$
+        Die Summe ist eine Geometrische Reihe und da $\omega_4^4=1$ ist, folgt:
+
+        \[\sum_{k=0}^{3}(\omega_4^{(j-l)})^k = \frac{(\omega_4^{(j-l)})^4-1}{\omega_4^{j-l}-1}=\frac{1-1}{\omega_4^{j-l}-1}=0\]
+        
+    \end{itemize}
+
+    Daraus folgt:
+        
+    \[
+    M\overline{M} = 4 \cdot I_4=
+    \begin{pmatrix}
+    4 & 0 & 0 & 0      \\
+    0 & 4 & 0 & 0    \\
+    0 & 0 & 4 & 0    \\
+    0 & 0 & 0 & 4     \\
+    \end{pmatrix}
+    \]
+        
+    \newpage
+    \item 
+    Der $(j,l)$-Eintrag des Produkts $M\overline{M}$ lässt sich wie folgt schreiben:
+
+    \[(M\overline{M})_{j,l}=\sum_{k=0}^{3} \omega_4^{jk}\cdot \overline{\omega_4^{lk}}
+    = \sum_{k=0}^{3} \omega_4^{jk}\cdot \omega_4^{-lk}= \langle m_j,m_l \rangle\]\\
+
+    Da wir in c) schon gezeigt haben, dass $M\overline{M} = 4I_4$. Es ergeben sich wieder 2 Fälle:
+
+    \begin{itemize}
+        \item[] Für $j \neq l$ ist $\langle m_j,m_l \rangle = 0$. Daraus folgt, dass die Vektoren $m_0,m_1,m_2$ und $m_3$ daher paarweise orthogonal sind.
+
+        \item[] Für $j=l$ ist $\langle m_j,m_l \rangle = \lVert m_j \lVert ^2 = 4$. Somit ist $\lVert m_j \lVert = 2$ für alle $j=0,1,2,3$.
+        
+    \end{itemize}
+
+    
+     
+\end{enumAlph}
+
+
+\newpage
+
+
+
+% Aufgabe 4.2
+\teil{Polynommultiplikation mittels Fouriertransformation}
+
+\begin{enumAlph}
+    \item 
+    \[N = N_u + N_v - 1\] 
+    N wird gewählt, weil, wenn $u(x)$ den Grad $N_u - 1$ und $v(x)$ den Grad $N_v - 1$ hat, ihr Produkt den Grad $N_u + N_v - 2$ hat und daher genau $N_u + N_v - 1$ Koeffizienten benötigt.
+
+    Wird $N$ kleiner als $N_u + N_v - 1$ gewählt, berechnet die DFT eine zyklische statt einer regulären Faltung, was zu Aliasing führt, sodass das Polynomprodukt fehlerhaft wird.
+
+    Wird $N$ größer gewählt, funktioniert der Algorithmus zwar weiterhin korrekt, führt jedoch unnötige zusätzliche Berechnungen durch und ist daher weniger effizient.
+
+    \item Die ,,geeigneten Stellen'' \\
+    \[\omega_k = e^{2\pi i k / N}, k=0,...,N-1\]
+    sind komplexe Zahlen, die gleichmäßig auf dem Einheitskreis verteilt sind. Die DFT berechnet das Polynom auf diesen Punkten.
+
+    For jedes $k$,\\
+    \[u(\omega_k) = \sum_{j=0}^{N-1} u_j\omega_k^j\]
+    \[v(\omega_k) = \sum_{j=0}^{N-1} v_j\omega_k^j\]
+
+    Diese Punkte werden gewählt, weil sie eine effiziente Auswertung und Interpolation mittels der FFT ermöglichen und weil ein Polynom vom Grad höchstens $N-1$ durch seine Werte an $N$ verschiedenen Punkten eindeutig bestimmt ist. 
+
+    \item Für das Produktpolynom 
+    \[ \omega(x) = u(x)v(x)\]
+    gilt an jedem Bewertungspunkt
+    \[w(\omega_k) = u(\omega_k)v(\omega_k) \]
+    Die komponentenweise Multiplikation der bewerteten Werte ergibt somit die Werte des Produktpolynoms.
+    Da ein Polynom vom Grad höchstent $N-1$ durch diese $N$ Werte eindeutig bestimmt ist, rekonstruiert die Anwendung der inversen DFT die Koeffizienten
+    \[(w_0,...,w_{N-1})\]
+    die genau die Koeffizienten des Produkpolynoms sind.
+
+    \item Die direkte Berechnung über
+    \[w_i = \sum_{j+k=i} u_j v_k\]
+    entspricht einer diskreten Faltung und benötigt quadratisch viele Operationen:
+    $\mathcal{O}(N^2)$
+    Das beschriebene Verfahren verwendet zwei FFTs, eine komponentenweise Multiplikation und eine inverse FFT. Da jede FFT Aufwand
+    $\mathcal{O}(N\log N)$
+    hat, ergibt sich insgesamt
+    $\mathcal{O}(N\log N)$
+    Damit ist das FFT-Verfahren deutlich effizienter als die direkte Berechnung.
+\end{enumAlph}
+
+\end{document}

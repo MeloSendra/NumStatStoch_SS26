@@ -1,0 +1,63 @@
+\documentclass[12pt]{scrartcl}
+
+\input{../styles/Packages.tex}
+\input{../styles/FormatAndHeader}
+\input{../styles/Lists}
+
+\setcounter{sheetnr}{7}
+\setcounter{exnum}{7}
+\setcounter{teilaufgabe}{1}
+
+\begin{document}
+
+\teil{QR-Zerlegung}
+Gegeben ist die Matrix
+\[
+  A = \begin{pmatrix}
+    1 && 1 && 0 \\
+    0 && 1 && 1 \\
+    1 && 0 && 1 \\
+  \end{pmatrix}  
+\]
+I: $a_{3,1}$ zu 0 setzen.\\
+
+\[
+  \rho_{3,1} = \sqrt{2}, c_{3,1} = s_{3,1} = \frac{\sqrt{2}}{2}
+\]
+
+Die neue Zeilen 1 und 3 sind wie folgt definiert:
+
+\begin{flalign*}
+  Z_1 &:= c_{3,1}\begin{pmatrix} 1 && 1 && 0 \end{pmatrix} + s_{i,j}\begin{pmatrix} 1 && 0 && 1 \end{pmatrix}\\
+  Z_3 &:= c_{3,1}\begin{pmatrix} 1 && 1 && 0 \end{pmatrix} + s_{i,j}\begin{pmatrix} 1 && 0 && 1 \end{pmatrix}\\ \implies
+  Z_1 & = \frac{\sqrt{2}}{2}\begin{pmatrix} 2 && 1 && 1 \end{pmatrix}\\[2pt] \implies
+  Z_1 & = \frac{\sqrt{2}}{2}\begin{pmatrix} 0 && -1 && 1 \end{pmatrix}\\
+\end{flalign*}
+
+Derzeitigen Inhalt der Matrix $G_1 A$:
+\[
+\begin{pmatrix}
+  \sqrt{2} && \frac{1}{\sqrt{2}}  && \frac{1}{\sqrt{2}} \\
+  0        && 1                   && 1                  \\
+  0        && -\frac{1}{\sqrt{2}} && \frac{1}{\sqrt{2}} \\
+\end{pmatrix}
+\]
+
+II: Da $a_{2,1}$ schon 0 ist, wird dieser Schritt übersprungen.\\
+
+III: $a_{3,2}$ auf 0 setzen\\
+
+\[
+  \rho_{3,2} = \frac{\sqrt{6}}{2}, c_{3,2} =\frac{\sqrt{6}}{3}, s_{3,2} = - \frac{\sqrt{3}}{3}
+\]
+
+Derzeitigen Inhalt der Matrix $G_1 G_3 A$:
+\[
+\begin{pmatrix}
+  \sqrt{2} && \frac{1}{\sqrt{2}}   && \frac{1}{\sqrt{2}} \\[4pt]
+  0        && \frac{\sqrt{6}}{2}   && \frac{\sqrt{6}}{6} \\[4pt]
+  0        && 0                    && \frac{2 \sqrt{3}}{3} \\
+\end{pmatrix}
+\]
+
+\end{document}
